@@ -101,4 +101,17 @@ fun StudioScreen() {
                 valueRange = 0f..2f
             )
 
-            Text("Exposure:
+            Text("Exposure: ${exposure.toInt()}")
+Slider(
+    value = exposure,
+    onValueChange = { exposure = it },
+    valueRange = -100f..100f
+)
+
+Text("Saturation: ${"%.1f".format(saturation)}")
+
+Slider(
+    value = saturation,
+    onValueChange = { saturation = it },
+    valueRange = 0f..2f
+)
