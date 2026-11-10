@@ -3,7 +3,9 @@
 
     <application
         android:allowBackup="true"
-        android:label="AI Movie Recap Studio"
+        android:label="Yaw AI Movie Recap Studio"
+        android:icon="@drawable/ic_launcher_512"
+        android:roundIcon="@drawable/ic_launcher_512"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:supportsRtl="true">
 
@@ -19,4 +21,5 @@
         </activity>
 
     </application>
+
 </manifest>
