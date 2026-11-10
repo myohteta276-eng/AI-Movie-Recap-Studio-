@@ -26,24 +26,79 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun StudioScreen() {
+
     var videoUri by remember { mutableStateOf<Uri?>(null) }
+
     var brightness by remember { mutableFloatStateOf(0f) }
     var contrast by remember { mutableFloatStateOf(1f) }
     var exposure by remember { mutableFloatStateOf(0f) }
     var saturation by remember { mutableFloatStateOf(1f) }
     var temperature by remember { mutableFloatStateOf(0f) }
+
     var resolution by remember { mutableStateOf("1080p") }
     var ratio by remember { mutableStateOf("9:16 TikTok") }
+
     var voiceover by remember { mutableStateOf(true) }
     var subtitles by remember { mutableStateOf(true) }
 
     val videoPicker = rememberLauncherForActivityResult(
-        ActivityResultContracts.GetContent()
-    ) { uri -> videoUri = uri }
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        videoUri = uri
+    }
 
     MaterialTheme {
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding
+                .padding(20.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+
+            Text(
+                "AI Movie Recap Studio",
+                fontSize = 26.sp
+            )
+
+            HorizontalDivider()
+
+            Text("Video Selection", fontSize = 20.sp)
+
+            Text(
+                if (videoUri == null)
+                    "ဗီဒီယို မရွေးရသေးပါ"
+                else
+                    "ဗီဒီယို ရွေးချယ်ပြီးပါပြီ"
+            )
+
+            Button(
+                onClick = {
+                    videoPicker.launch("video/*")
+                }
+            ) {
+                Text("SELECT VIDEO")
+            }
+
+            HorizontalDivider()
+
+            Text("Video Adjustments", fontSize = 20.sp)
+
+            Text("Brightness: ${brightness.toInt()}")
+
+            Slider(
+                value = brightness,
+                onValueChange = { brightness = it },
+                valueRange = -100f..100f
+            )
+
+            Text("Contrast: ${"%.1f".format(contrast)}")
+
+            Slider(
+                value = contrast,
+                onValueChange = { contrast = it },
+                valueRange = 0f..2f
+            )
+
+            Text("Exposure:
