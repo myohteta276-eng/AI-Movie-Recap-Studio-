@@ -115,3 +115,75 @@ Slider(
     onValueChange = { saturation = it },
     valueRange = 0f..2f
 )
+Text("Color Temperature: ${temperature.toInt()}")
+
+Slider(
+    value = temperature,
+    onValueChange = { temperature = it },
+    valueRange = -100f..100f
+)
+
+HorizontalDivider()
+
+Text("Export Settings", fontSize = 20.sp)
+
+Text("Resolution: $resolution")
+
+Row(
+    horizontalArrangement = Arrangement.spacedBy(8.dp)
+) {
+    listOf("720p", "1080p", "2K").forEach {
+        OutlinedButton(onClick = { resolution = it }) {
+            Text(it)
+        }
+    }
+}
+
+Text("Aspect Ratio: $ratio")
+
+listOf(
+    "9:16 TikTok",
+    "16:9 YouTube",
+    "1:1 Facebook"
+).forEach { option ->
+    Row {
+        RadioButton(
+            selected = ratio == option,
+            onClick = { ratio = option }
+        )
+        Text(option)
+    }
+}
+
+HorizontalDivider()
+
+Row {
+    Checkbox(
+        checked = voiceover,
+        onCheckedChange = { voiceover = it }
+    )
+    Text("Voiceover")
+}
+
+Row {
+    Checkbox(
+        checked = subtitles,
+        onCheckedChange = { subtitles = it }
+    )
+    Text("Subtitles")
+}
+
+Button(
+    onClick = { },
+    modifier = Modifier.fillMaxWidth()
+) {
+    Text("EXPORT VIDEO")
+}
+
+Text(
+    "လက်ရှိအဆင့်မှာ UI နဲ့ Setting များသာ အလုပ်လုပ်ပါသေးသည်။"
+)
+
+        }
+    }
+}
