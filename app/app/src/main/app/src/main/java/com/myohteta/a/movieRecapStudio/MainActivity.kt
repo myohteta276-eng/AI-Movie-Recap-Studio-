@@ -80,4 +80,19 @@ fun MovieRecapApp() {
 
             Text("Selected Video")
 
-            key
+            AndroidView(
+    factory = { context ->
+        VideoView(context).apply {
+            setVideoURI(videoUri)
+            val controller = MediaController(context)
+            setMediaController(controller)
+            controller.setAnchorView(this)
+            setOnPreparedListener {
+                start()
+            }
+        }
+    },
+    modifier = Modifier
+        .fillMaxWidth()
+        .height(230.dp)
+)
